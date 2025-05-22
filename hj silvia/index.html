@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmes em Cartaz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .filter-section {
+            margin-bottom: 1.5em;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 0.5em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-size: 1em;
+        }
+
+        .font-buttons {
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+
+        .font-buttons button {
+            margin: 0 10px;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #6c8fc7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .font-buttons button:hover {
+            background-color: #4a6fa5;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5em;
+        }
+
+        .image-item {
+            flex: 1 1 300px;
+            max-width: 320px;
+            margin: 0;
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1em;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1em;
+        }
+
+        .image-item p {
+            margin: 0;
+            color: #555;
+        }
+
+        .image-item strong {
+            color: #4a6fa5;
+            font-size: 1.2em;
+        }
+
+        footer {
+            background-color: #4a6fa5;
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+            margin-top: auto;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 0.5em 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1em;
+        }
+
+        footer strong {
+            color: #ffeb99;
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .image-item {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Filmes em Cartaz</h1>
+    </header>
+    <main>
+        <div class="filter-section">
+            <label for="genre-filter">Filtrar por Gênero:</label>
+            <select id="genre-filter">
+                <option value="all">Todos</option>
+                <option value="acao">Ação</option>
+                <option value="comedia">Comédia</option>
+                <option value="drama">Drama</option>
+            </select>
+        </div>
+        <div class="font-buttons">
+            <button id="increase-font">A+</button>
+            <button id="decrease-font">A-</button>
+        </div>
+        <div class="image-container">
+            <div class="image-item acao">
+                <img src="https://m.media-amazon.com/images/I/81fk-N7tvbL._AC_UF1000,1000_QL80_.jpg" alt="John Wick 4">
+                <p><strong>John Wick 4</strong><br>Assassino lendário enfrenta novos inimigos ao redor do mundo em uma busca por liberdade.</p>
+            </div>
+            <div class="image-item comedia">
+                <img src="https://topview.com.br/wp-content/uploads/2023/07/cartaz-filme-barbie.jpeg" alt="Barbie">
+                <p><strong>Barbie</strong><br>Vivendo em Barbieland, Barbie embarca em uma jornada no mundo real para descobrir o verdadeiro sentido da vida.</p>
+            </div>
+            <div class="image-item drama">
+                <img src="https://br.web.img2.acsta.net/pictures/23/05/08/10/29/0695770.jpg" alt="Oppenheimer">
+                <p><strong>Oppenheimer</strong><br>A vida do físico J. Robert Oppenheimer e seu papel no desenvolvimento da bomba atômica.</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p><strong>Nota sobre Daltonismo:</strong> O daltonismo é uma alteração na percepção das cores que afeta principalmente a distinção entre tons de vermelho, verde e azul. Essa condição ocorre devido à deficiência em cones da retina e pode dificultar a experiência visual em conteúdos coloridos. Nosso site está sendo ajustado para ser mais acessível a todos os usuários.</p>
+        <p>Desenvolvido por Nome Sobrenome</p>
+    </footer>
+    <script>
+        document.getElementById('genre-filter').addEventListener('change', function () {
+            const selectedGenre = this.value;
+            const items = document.querySelectorAll('.image-item');
+
+            items.forEach(item => {
+                item.style.display = selectedGenre === 'all' || item.classList.contains(selectedGenre)
+                    ? 'block' : 'none';
+            });
+        });
+
+        document.getElementById('increase-font').addEventListener('click', () => {
+            changeFontSize(1);
+        });
+
+        document.getElementById('decrease-font').addEventListener('click', () => {
+            changeFontSize(-1);
+        });
+
+        function changeFontSize(delta) {
+            const body = document.body;
+            const style = window.getComputedStyle(body, null).getPropertyValue('font-size');
+            const currentSize = parseFloat(style);
+            const newSize = currentSize + delta;
+            
+            if (newSize >= 12 && newSize <= 24) {
+                body.style.fontSize = newSize + 'px';
+            }
+        }
+    </script>
+</body>
+</html>

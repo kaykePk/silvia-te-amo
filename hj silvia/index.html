@@ -16,14 +16,35 @@
             color: #333;
             font-size: 16px;
             line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        body.protanopia {
+            --primary-color: #5a5a9c;
+            --secondary-color: #7a7ab9;
+            --highlight-color: #9c9cd6;
+            filter: none;
+        }
+        body.deuteranopia {
+            --primary-color: #5a5a9c;
+            --secondary-color: #7a7ab9;
+            --highlight-color: #9c9cd6;
+            filter: none;
+        }
+        body.tritanopia {
+            --primary-color: #4a7a7a;
+            --secondary-color: #6a9a9a;
+            --highlight-color: #8ababa;
+            filter: none;
         }
 
         header {
-            background-color: #4a6fa5;
+            background-color: var(--primary-color, #4a6fa5);
             color: white;
             text-align: center;
             padding: 1em 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
         }
 
         h1 {
@@ -45,38 +66,76 @@
             text-align: center;
         }
 
+        .accessibility-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        .accessibility-section h2 {
+            width: 100%;
+            text-align: center;
+            margin: 0.5em 0;
+            color: #555;
+            font-size: 1.2em;
+        }
+
         label {
             font-weight: bold;
             margin-right: 10px;
         }
 
-        select {
-            padding: 0.5em;
+        select, button {
+            padding: 0.5em 1em;
             border-radius: 5px;
             border: 1px solid #ddd;
             background-color: white;
             font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button {
+            background-color: var(--primary-color, #6c8fc7);
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            opacity: 0.9;
         }
 
         .font-buttons {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 1em;
             margin-bottom: 1.5em;
         }
 
-        .font-buttons button {
-            margin: 0 10px;
-            padding: 0.5em 1em;
-            font-size: 1em;
-            cursor: pointer;
-            background-color: #6c8fc7;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+        .daltonism-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            margin-bottom: 1.5em;
         }
 
-        .font-buttons button:hover {
-            background-color: #4a6fa5;
+        .daltonism-buttons button {
+            padding: 0.5em 1em;
+        }
+
+        .normal-vision {
+            background-color: var(--primary-color, #6c8fc7);
+        }
+        .protanopia-btn {
+            background-color: #5a5a9c;
+        }
+        .deuteranopia-btn {
+            background-color: #5a5a9c;
+        }
+        .tritanopia-btn {
+            background-color: #4a7a7a;
         }
 
         .image-container {
@@ -117,12 +176,12 @@
         }
 
         .image-item strong {
-            color: #4a6fa5;
+            color: var(--primary-color, #4a6fa5);
             font-size: 1.2em;
         }
 
         footer {
-            background-color: #4a6fa5;
+            background-color: var(--primary-color, #4a6fa5);
             color: white;
             text-align: center;
             padding: 1.5em 0;
@@ -151,6 +210,15 @@
             .image-item {
                 max-width: 100%;
             }
+
+            .accessibility-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .daltonism-buttons {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
@@ -168,13 +236,24 @@
                 <option value="drama">Drama</option>
             </select>
         </div>
-        <div class="font-buttons">
-            <button id="increase-font">A+</button>
-            <button id="decrease-font">A-</button>
+
+        <div class="accessibility-section">
+            <h2>Acessibilidade</h2>
+            <div class="font-buttons">
+                <button id="increase-font">Aumentar Fonte (A+)</button>
+                <button id="decrease-font">Diminuir Fonte (A-)</button>
+            </div>
+            <div class="daltonism-buttons">
+                <button id="normal-vision" class="normal-vision">Visão Normal</button>
+                <button id="protanopia-btn" class="protanopia-btn">Protanopia</button>
+                <button id="deuteranopia-btn" class="deuteranopia-btn">Deuteranopia</button>
+                <button id="tritanopia-btn" class="tritanopia-btn">Tritanopia</button>
+            </div>
         </div>
+
         <div class="image-container">
             <div class="image-item acao">
-                <img src="https://m.media-amazon.com/images/I/81fk-N7tvbL._AC_UF1000,1000_QL80_.jpg" alt="John Wick 4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6LR4RE6yabuLmU7sj_pF_M79D2uz_8RiyYQ&s" alt="John Wick 4">
                 <p><strong>John Wick 4</strong><br>Assassino lendário enfrenta novos inimigos ao redor do mundo em uma busca por liberdade.</p>
             </div>
             <div class="image-item comedia">
@@ -192,6 +271,7 @@
         <p>Desenvolvido por Nome Sobrenome</p>
     </footer>
     <script>
+     
         document.getElementById('genre-filter').addEventListener('change', function () {
             const selectedGenre = this.value;
             const items = document.querySelectorAll('.image-item');
@@ -202,6 +282,7 @@
             });
         });
 
+     
         document.getElementById('increase-font').addEventListener('click', () => {
             changeFontSize(1);
         });
@@ -216,10 +297,27 @@
             const currentSize = parseFloat(style);
             const newSize = currentSize + delta;
             
+           
             if (newSize >= 12 && newSize <= 24) {
                 body.style.fontSize = newSize + 'px';
             }
         }
+
+        document.getElementById('normal-vision').addEventListener('click', () => {
+            document.body.className = '';
+        });
+
+        document.getElementById('protanopia-btn').addEventListener('click', () => {
+            document.body.className = 'protanopia';
+        });
+
+        document.getElementById('deuteranopia-btn').addEventListener('click', () => {
+            document.body.className = 'deuteranopia';
+        });
+
+        document.getElementById('tritanopia-btn').addEventListener('click', () => {
+            document.body.className = 'tritanopia';
+        });
     </script>
 </body>
 </html>
